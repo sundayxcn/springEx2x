@@ -1,0 +1,41 @@
+
+server:
+  servlet:
+    context-path: /usercenter
+spring:
+  application:
+    name: sunday-user-center
+  datasource:
+    url: jdbc:mysql://localhost:3306/test?useSSL=false&serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: sunday1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+        allow: ""
+      initial-size: 5
+      min-idle: 5
+      max-active: 2000
+      max-wait: 60000
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 1 FROM DUAL
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      filters: stat,wall,log4j2
+      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      filter:
+        wall:
+          enabled: true
+        stat:
+          enabled: true
+
+  
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
